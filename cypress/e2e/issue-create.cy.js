@@ -1,3 +1,7 @@
+import { faker } from '@faker-js/faker';
+const randomTitle = faker.random.word();
+const randomDescription = faker.lorem.sentence();
+
 describe('Issue create', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -65,4 +69,64 @@ describe('Issue create', () => {
       cy.get('[data-testid="form-field:title"]').should('contain', 'This field is required');
     });
   });
+
+      //Test1: Should create an issue and validate it successfully
+  it('//Should create an issue and validate it successfully',()=>{
+    //System finds modal for creating issue and does next steps inside of it
+    cy.get('[data-testid="modal:issue-create"]').within(() => {
+      
+      //open issue type dropdown and choose Bug
+      cy.get('[data-testid="select:type"]').click();
+      cy.get('[data-testid="select-option:Bug"]')
+          .trigger('click');
+            
+      //Type value to Short summary input field
+      cy.get('input[name="title"]').type('Bug')
+
+      //Type value to Description input field
+      cy.get('.ql-editor').type('My bug description, do stuff');
+
+      //Select Pickle Rick from reporter dropdown
+      cy.get('[data-testid="select:userIds"]').click();
+      cy.get('[data-testid="select-option:Pickle Rick"]').click();
+
+      //Select Highest from priority dropdown
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid="select-option:Highest"]').click();
+
+      //Click on button "Create issue"
+      cy.get('button[type="submit"]').click();
+    });
+
+  });
+    //Test2: create and issue and use random data generator for data 
+  it('Should create an issue and validate it successfully',()=>{
+      //System finds modal for creating issue and does next steps inside of it
+      cy.get('[data-testid="modal:issue-create"]').within(() => {
+      
+        //open Issue type dropdown and choose Task
+      cy.get('[data-testid="select:type"]').click();
+      cy.get('[data-testid="select-option:Story"]') //The option Task is unselectable, it is not finding it, bug? 
+          .trigger('click');
+            
+      //Type random value to Short summary input field
+      cy.get('input[name="title"]').type(randomTitle);
+
+      //Type random value to Description input field
+      cy.get('.ql-editor').type(randomDescription);
+
+      //Select Baby Yoda from reporter dropdown
+      cy.get('[data-testid="select:userIds"]').click();
+      cy.get('[data-testid="select-option:Baby Yoda"]').click();
+
+      //Select Highest from priority dropdown
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid="select-option:Low"]').click();
+
+      //Click on button "Create issue"
+      cy.get('button[type="submit"]').click();
+
+   });
+  });
 });
+     
