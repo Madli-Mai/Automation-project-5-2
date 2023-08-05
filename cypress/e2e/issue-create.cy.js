@@ -69,6 +69,7 @@ describe('Issue create', () => {
       cy.get('[data-testid="form-field:title"]').should('contain', 'This field is required');
     });
   });
+<<<<<<< HEAD
 
       //Test1: Should create an issue and validate it successfully
   it('//Should create an issue and validate it successfully',()=>{
@@ -130,3 +131,6 @@ describe('Issue create', () => {
   });
 });
      
+=======
+});
+>>>>>>> 00dfed8746cacccb668c2b53aad51d166902bfb6
