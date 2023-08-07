@@ -109,7 +109,7 @@ describe('Issue time tracking', () => {
     });
 
     //Creating test for remove logged time TC
-    it.only('Create issue, add timelog and remove it', () => {
+    it('Create issue, add timelog and remove it', () => {
         const title = 'Madli timetracking'
         const description = 'Numbreid'
 
